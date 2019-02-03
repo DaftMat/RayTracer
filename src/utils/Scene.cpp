@@ -2,6 +2,7 @@
 // Created by daftmat on 01/02/19.
 //
 
+#include <iostream>
 #include "Scene.h"
 
 std::ostream & operator<<(std::ostream & os, Color c){
@@ -32,13 +33,17 @@ Color operator*(const Color & c, float f) {
 	return ret;
 }
 
-Observator createObservator(const Point3f & pos, const Eigen::Vector3f & zc, const Eigen::Vector3f & up, float fov, float width, float height){
+float degToRad(float deg){
+    return deg * PI/180;
+}
+
+Observator createObservator(const Vector3f & pos, const Vector3f & zc, const Vector3f & up, float fov, float width, float height){
 	Observator observator;
 	observator.z = zc;
 	observator.x = zc.cross(up);
 	observator.y = observator.x.cross(zc);
 	observator.pos = pos;
-	observator.obs = pos - (1.f/tanf(fov/2.f))*zc;
+	observator.obs = pos - zc * (1/tanf(degToRad(fov) * 0.5f));
 	observator.width = width;
 	observator.height = height;
 	return observator;

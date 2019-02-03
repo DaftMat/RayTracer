@@ -5,8 +5,10 @@
 #ifndef RAYTRACER_SCENE_H
 #define RAYTRACER_SCENE_H
 
-#include "Point3f.h"
+#include "Vector3.h"
 #include <vector>
+
+const auto PI = 3.141592653589793238462643383279502884197169399375105820974944f;
 
 typedef struct Color{
 	float r;
@@ -26,31 +28,31 @@ typedef struct Material {
 }Material;
 
 typedef struct Sphere {
-	Point3f centre;
+    Vector3f centre;
 	float radius;
 	int material;
 }Sphere;
 
 typedef struct Light{
 	Color color;
-	Point3f pos;
+    Vector3f pos;
 }Light;
 
 typedef struct Ray{
-	Point3f pos;
-	Eigen::Vector3f dir;
+    Vector3f pos;
+	Vector3f dir;
 }Ray;
 
 typedef struct Observator{
-	Point3f obs;
-	Point3f pos;
-	Eigen::Vector3f x, y, z;
+    Vector3f obs;
+    Vector3f pos;
+	Vector3f x, y, z;
 	float width;
 	float height;
 }Observator;
 
 /* obervator's constructor */
-Observator createObservator(const Point3f &, const Eigen::Vector3f &, const Eigen::Vector3f &, float, float, float);
+Observator createObservator(const Vector3f &, const Vector3f &, const Vector3f &, float, float, float);
 
 typedef struct Scene {
 	std::vector<Light> lights;
