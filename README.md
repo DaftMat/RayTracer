@@ -12,3 +12,5 @@
 ##
 
 I assume how this first version isn't such comfortable, at least to edit the scene. I will add xml parsing possibilities in future updates.
+
+![alt text](http://github.com/DaftMat/RayTracer/edit/master/out/example.ppm)
