@@ -7,19 +7,17 @@
 #include "RayTracer.h"
 
 bool hitSphere(const Ray &r, const Sphere &s, float &t) {
-    float a = r.dir.dot(r.dir);
-    float b = 2.f * (r.pos-s.centre).dot(r.dir);
-    Eigen::Vector3f temp = r.pos-s.centre;
-    float c = temp.dot(temp) - s.radius*s.radius;
-    float del = b*b - 4.f*a*c;
-    if (del > 0){
-        float t0 = (-b-std::sqrt(del))/2*a;
-        if (t0 >= 0.0f){
+    Eigen::Vector3f dist = s.centre - r.pos;
+    float B = r.dir.dot(dist);
+    float del = B*B - dist.dot(dist) + s.radius * s.radius;
+    if (del > 0.f){
+        float t0 = (B-sqrtf(del));
+        if (t0 > 0.1f){
             t = t0;
             return true;
         }
-        float t1 = (-b+std::sqrt(del))/2*a;
-        if (t1 >= 0.0f){
+        float t1 = (B+sqrtf(del));
+        if (t1 > 0.1f){
             t = t1;
             return true;
         }
