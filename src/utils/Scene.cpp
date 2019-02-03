@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <algorithm>
 #include "Scene.h"
 
 std::ostream & operator<<(std::ostream & os, Color c){
